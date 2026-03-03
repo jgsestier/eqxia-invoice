@@ -60,8 +60,6 @@ function generatePDF(doc, f, items, taxOpt) {
   // Teal bar + logo
   setF(B.teal); doc.rect(ML, MT, 1.4, 23, "F");
   try { doc.addImage(LOGO_B64, "PNG", ML+4, MT-1, 52, 17); } catch(e) {}
-  doc.setFont("helvetica","normal"); doc.setFontSize(8); setC(B.teal);
-  doc.text("Applied Intelligence", ML+5, MT+18);
 
   // Invoice title right
   doc.setFont("helvetica","bold"); doc.setFontSize(28); setC(B.dark);
@@ -88,6 +86,8 @@ function generatePDF(doc, f, items, taxOpt) {
   doc.text(f.client, ML, y+5.5);
   doc.setFont("helvetica","normal"); doc.setFontSize(8); setC(B.txt);
   const addr = [f.addr1,f.addr2,f.postal,f.country].filter(Boolean);
+  if(f.client_brn) addr.push("BRN: "+f.client_brn);
+  if(f.client_vat) addr.push("VAT: "+f.client_vat);
   addr.forEach((ln,i) => doc.text(ln, ML, y+10+i*4.5));
 
   // Meta right
