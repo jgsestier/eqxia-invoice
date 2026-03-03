@@ -60,8 +60,6 @@ function generatePDF(doc, f, items, taxOpt) {
   // Teal bar + logo
   // accent bar removed
   try { doc.addImage(LOGO_B64, "PNG", ML+4, MT-1, 52, 17); } catch(e) {}
-  doc.setFont("helvetica","normal"); doc.setFontSize(8); setC(B.teal);
-  doc.text("Applied Intelligence", ML+5, MT+18);
 
   // Invoice title right
   doc.setFont("helvetica","bold"); doc.setFontSize(28); setC(B.dark);
@@ -151,8 +149,7 @@ function generatePDF(doc, f, items, taxOpt) {
   doc.text("Notes",ML,y);
   doc.setFont("helvetica","normal"); doc.setFontSize(8); setC(B.txt);
   doc.text(f.notes||"Thank you for your trust.",ML,y+5);
-  y+=14; doc.setFont("helvetica","bold"); doc.setFontSize(9); setC(B.dark);
-  doc.text("Terms & Conditions",ML,y);
+  
   setD(B.bdr); doc.setLineWidth(0.2); doc.line(ML,283,R,283);
   doc.setFont("helvetica","normal"); doc.setFontSize(7); setC(B.txt2);
   doc.text("1",R,288,{align:"right"});
@@ -169,7 +166,9 @@ function generatePDF(doc, f, items, taxOpt) {
   [["Bank:","MCB"],["Currency:","MUR"],["Account number:","000455533989"],["IBAN:","MU05MCBL0901000455533989000MUR"],["SWIFT:","MCBLMUMU"]].forEach(([l,v]) => { doc.text(l,ML,y); doc.text(v,ML+38,y); y+=5; });
 
   y+=8; doc.setFont("helvetica","bold"); doc.setFontSize(9); setC(B.dark);
-  doc.text("Terms and conditions of sale",ML,y); y+=6;
+  doc.text("Terms and conditions of sale",ML,y); y+=4;
+  doc.setFont("helvetica","bold"); doc.setFontSize(9); setC(B.dark);
+  doc.text("Terms & Conditions",ML,y); y+=8;
   doc.setFont("helvetica","normal"); doc.setFontSize(7); setC(B.txt);
   const cgv = [
     "1. The approval of a quote implies that the Client accepts and abides to honour all the terms and conditions set out below.",
