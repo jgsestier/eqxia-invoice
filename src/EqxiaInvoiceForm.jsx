@@ -86,6 +86,8 @@ function generatePDF(doc, f, items, taxOpt) {
   doc.text(f.client, ML, y+5.5);
   doc.setFont("helvetica","normal"); doc.setFontSize(8); setC(B.txt);
   const addr = [f.addr1,f.addr2,f.postal,f.country].filter(Boolean);
+  if(f.client_brn) addr.push("BRN: "+f.client_brn);
+  if(f.client_vat) addr.push("VAT: "+f.client_vat);
   addr.forEach((ln,i) => doc.text(ln, ML, y+10+i*4.5));
 
   // Meta right
@@ -166,8 +168,6 @@ function generatePDF(doc, f, items, taxOpt) {
   [["Bank:","MCB"],["Currency:","MUR"],["Account number:","000455533989"],["IBAN:","MU05MCBL0901000455533989000MUR"],["SWIFT:","MCBLMUMU"]].forEach(([l,v]) => { doc.text(l,ML,y); doc.text(v,ML+38,y); y+=5; });
 
   y+=8; doc.setFont("helvetica","bold"); doc.setFontSize(9); setC(B.dark);
-  doc.text("Terms and conditions of sale",ML,y); y+=4;
-  doc.setFont("helvetica","bold"); doc.setFontSize(9); setC(B.dark);
   doc.text("Terms & Conditions",ML,y); y+=8;
   doc.setFont("helvetica","normal"); doc.setFontSize(7); setC(B.txt);
   const cgv = [
